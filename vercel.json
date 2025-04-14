@@ -2,13 +2,8 @@
   "version": 2,
   "builds": [
     {
-      "src": "server.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "bot/bot.js",
-      "use": "@vercel/node",
-      "config": { "includeFiles": ["bot/**"] }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -16,10 +11,6 @@
       "src": "/webhook",
       "dest": "/bot/bot.js",
       "methods": ["POST"]
-    },
-    {
-      "src": "/(.*)",
-      "dest": "server.js"
     }
   ]
 }
