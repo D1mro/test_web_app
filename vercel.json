@@ -10,15 +10,10 @@
       {
         "src": "/(.*)",
         "dest": "server.js"
+        "src": "/bot/webhook",
+        "dest": "/bot/bot.js",
+        "methods": ["POST"]
       }
     ]
   }
-{
-  "routes": [
-    {
-      "src": "/bot/webhook",
-      "dest": "/bot/bot.js",
-      "methods": ["POST"]
-    }
-  ]
-}
+
