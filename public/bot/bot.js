@@ -1,39 +1,69 @@
-
-
-
-const express = require('express');
 const { Telegraf } = require('telegraf');
+const express = require('express');
 
-// Укажите токен бота вручную
-const BOT_TOKEN = '7980015624:AAEdP30COOVbhlgP_hcX6mnoUfPUSErNTjg'; // Замените на ваш токен
-const WEBAPP_URL = 'https://your-webapp-url.com'; // Замените на ваш URL веб-приложения
+const BOT_TOKEN = '7980015624:AAEdP30COOVbhlgP_hcX6mnoUfPUSErNTjg';
+const WEBAPP_URL = 'https://swap-shoes-bot.vercel.app'; // Замените на ваш реальный URL
 
 const bot = new Telegraf(BOT_TOKEN);
 const app = express();
 
-// Установка вебхука
-const webhookUrl = `https://your-vercel-app.vercel.app/webhook`; // Замените на ваш URL
-bot.telegram.setWebhook(webhookUrl);
+// Middleware для парсинга JSON
+app.use(express.json());
 
-// Обработчик команды
+// 1. Настройка вебхука (критически важно!)
+const initWebhook = async () => {
+  try {
+    const webhookUrl = `https://${process.env.VERCEL_URL}/webhook` || 'https://your-app.vercel.app/webhook';
+    await bot.telegram.setWebhook(webhookUrl);
+    console.log('Webhook установлен на:', webhookUrl);
+  } catch (e) {
+    console.error('Ошибка настройки вебхука:', e);
+  }
+};
+
+// 2. Обработчики команд
 bot.command('start', (ctx) => {
-  ctx.reply('Welcome!', {
-    reply_markup: {
-      inline_keyboard: [[{
-        text: 'Open WebApp',
-        web_app: { url: WEBAPP_URL }
-      }]]
-    }
+  try {
+    ctx.reply('Добро пожаловать в SWAP SHOES! 👟', {
+      reply_markup: {
+        inline_keyboard: [
+          [{
+            text: '🛍️ Открыть магазин',
+            web_app: { url: WEBAPP_URL }
+          }]
+        ]
+      }
+    });
+  } catch (e) {
+    console.error('Ошибка в команде /start:', e);
+  }
+});
+
+// 3. Подключение вебхука
+app.post('/webhook', (req, res) => {
+  try {
+    bot.handleUpdate(req.body, res);
+  } catch (e) {
+    console.error('Ошибка обработки вебхука:', e);
+    res.status(200).send();
+  }
+});
+
+// 4. Обязательные экспорты для Vercel
+module.exports = async (req, res) => {
+  try {
+    await initWebhook();
+    return app(req, res);
+  } catch (e) {
+    console.error('Ошибка инициализации:', e);
+    return res.status(500).send('Internal Server Error');
+  }
+};
+
+// 5. Локальный запуск (для тестов)
+if (process.env.NODE_ENV === 'development') {
+  app.listen(3000, () => {
+    console.log('Локальный сервер запущен на порту 3000');
+    bot.launch();
   });
-});
-
-// Вебхук для Telegram
-app.use(bot.webhookCallback('/webhook'));
-
-// Запуск сервера
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
-module.exports = app; // Критично для Vercel!
+}
