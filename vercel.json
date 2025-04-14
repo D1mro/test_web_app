@@ -13,3 +13,12 @@
       }
     ]
   }
+{
+  "routes": [
+    {
+      "src": "/bot/webhook",
+      "dest": "/bot/bot.js",
+      "methods": ["POST"]
+    }
+  ]
+}
