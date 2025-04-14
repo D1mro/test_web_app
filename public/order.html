@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа | SWAP SHOES</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">SWAP <span>SHOES</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="order.html" class="active">Заказать</a></li>
+                    <li><a href="how-to.html">Как заказать</a></li>
+                    <li><a href="delivery.html">Доставка</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Оформление заказа</h1>
+            <p>Закажите кроссовки с любой китайской площадки - мы сделаем всё остальное</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <h2 class="section-title">Поддерживаемые площадки</h2>
+        
+        <div class="platform-tabs">
+            <div class="platform-tab active" data-platform="poizon">Poizon (得物)</div>
+            <div class="platform-tab" data-platform="goofish">Goofish (闲鱼)</div>
+            <div class="platform-tab" data-platform="weidian">Weidian (微店)</div>
+            <div class="platform-tab" data-platform="other">Другая площадка</div>
+        </div>
+        
+        <div id="poizon-info" class="platform-info active">
+            <h3>Как заказать с Poizon (得物)</h3>
+            <p>1. Найдите нужные кроссовки в приложении Poizon</p>
+            <p>2. Скопируйте ссылку на товар (нажмите "Поделиться")</p>
+            <p>3. Вставьте ссылку в форму заказа ниже</p>
+            <p>4. Укажите размер и цвет (если требуется)</p>
+        </div>
+        
+        <div id="goofish-info" class="platform-info">
+            <h3>Как заказать с Goofish (闲鱼)</h3>
+            <p>1. Найдите кроссовки в приложении Goofish (Xianyu)</p>
+            <p>2. Скопируйте ссылку на товар</p>
+            <p>3. Вставьте ссылку в форму заказа ниже</p>
+            <p>4. Укажите все детали в комментариях</p>
+        </div>
+        
+        <div id="weidian-info" class="platform-info">
+            <h3>Как заказать с Weidian (微店)</h3>
+            <p>1. Найдите товар в приложении Weidian</p>
+            <p>2. Скопируйте ссылку на товар</p>
+            <p>3. Вставьте ссылку в форму заказа ниже</p>
+            <p>4. Укажите все необходимые параметры</p>
+        </div>
+        
+        <div id="other-info" class="platform-info">
+            <h3>Заказ с других площадок</h3>
+            <p>1. Найдите нужные кроссовки</p>
+            <p>2. Скопируйте ссылку на товар</p>
+            <p>3. Вставьте ссылку в форму заказа ниже</p>
+            <p>4. Укажите название площадки в специальном поле</p>
+        </div>
+        
+        <h2 class="section-title">Форма заказа</h2>
+        
+        <form class="order-form" id="order-form">
+            <div class="form-group">
+                <label for="platform">Площадка</label>
+                <select id="platform" name="platform" required>
+                    <option value="poizon">Poizon (得物)</option>
+                    <option value="goofish">Goofish (闲鱼)</option>
+                    <option value="weidian">Weidian (微店)</option>
+                    <option value="other">Другая площадка</option>
+                </select>
+            </div>
+            
+            <div class="form-group" id="custom-platform-group" style="display: none;">
+                <label for="custom-platform">Укажите название площадки</label>
+                <input type="text" id="custom-platform" name="custom-platform" placeholder="Например, Taobao, 1688 и т.д.">
+            </div>
+            
+            <div class="form-group">
+                <label for="product-url">Ссылка на товар</label>
+                <input type="url" id="product-url" name="product-url" placeholder="https://..." required>
+            </div>
+            
+            <div class="form-group">
+                <label for="size">Размер</label>
+                <input type="text" id="size" name="size" placeholder="Укажите размер (EU, US, UK и т.д.)" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="color">Цвет</label>
+                <input type="text" id="color" name="color" placeholder="Укажите цвет/модель" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="quantity">Количество</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Ваше имя</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Адрес доставки</label>
+                <textarea id="address" name="address" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="comments">Комментарии к заказу</label>
+                <textarea id="comments" name="comments" placeholder="Особые пожелания, дополнительные параметры и т.д."></textarea>
+            </div>
+            
+            <button type="submit" class="btn">Отправить заказ</button>
+        </form>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>SWAP SHOES</h3>
+                <p>Заказ кроссовок с китайских маркетплейсов с проверкой и доставкой.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Площадки</h3>
+                <ul>
+                    <li><a href="order.html">Poizon (得物)</a></li>
+                    <li><a href="order.html">Goofish (闲鱼)</a></li>
+                    <li><a href="order.html">Weidian (微店)</a></li>
+                    <li><a href="order.html">Другие площадки</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Информация</h3>
+                <ul>
+                    <li><a href="how-to.html">Как заказать</a></li>
+                    <li><a href="delivery.html">Доставка и оплата</a></li>
+                    <li><a href="delivery.html">Тарифы</a></li>
+                    <li><a href="about.html">О компании</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Контакты</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> order@swapshoes.ru</li>
+                    <li><i class="fas fa-phone"></i> +7 (999) 123-45-67</li>
+                    <li><i class="fas fa-clock"></i> Пн-Пт: 9:00-18:00</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 SWAP SHOES. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/telegram-app.js"></script>
+</body>
+</html>
