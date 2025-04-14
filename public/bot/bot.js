@@ -1,3 +1,6 @@
+
+
+
 const express = require('express');
 const { Telegraf } = require('telegraf');
 
@@ -9,7 +12,8 @@ const bot = new Telegraf(BOT_TOKEN);
 const app = express();
 
 // Установка вебхука
-bot.telegram.setWebhook(`${process.env.VERCEL_URL}/webhook`);
+const webhookUrl = `https://your-vercel-app.vercel.app/webhook`; // Замените на ваш URL
+bot.telegram.setWebhook(webhookUrl);
 
 // Обработчик команды
 bot.command('start', (ctx) => {
