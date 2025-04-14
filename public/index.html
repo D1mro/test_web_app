@@ -1,25 +1,168 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SWAP SHOES - Заказ кроссовок с китайских маркетплейсов</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-    body {
-        background-color: red !important;
-    }
-    h1 {
-        color: white !important;
-    }
-    </style>
 </head>
 <body>
-    <!-- Ваш HTML-код остается без изменений -->
     <header>
-        [... весь ваш HTML код ...]
+        <div class="header-container">
+            <a href="index.html" class="logo">SWAP <span>SHOES</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Главная</a></li>
+                    <li><a href="order.html">Заказать</a></li>
+                    <li><a href="how-to.html">Как заказать</a></li>
+                    <li><a href="delivery.html">Доставка</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Эксклюзивные кроссовки с Poizon, Weidian и других площадок</h1>
+            <p>Заказывайте редкие и лимитированные модели напрямую из Китая с гарантией подлинности</p>
+            <a href="order.html" class="btn">Оформить заказ</a>
+            <a href="how-to.html" class="btn btn-outline">Как это работает</a>
+        </div>
+    </section>
+    
+    <div class="container">
+        <h2 class="section-title">Популярные категории</h2>
+        
+        <div class="categories">
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Nike">
+                </div>
+                <h3>Nike</h3>
+                <p>Dunk, Air Jordan, Air Force и другие модели</p>
+                <a href="order.html" class="btn btn-small">Заказать</a>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&auto=format&fit=crop&w=1025&q=80" alt="Adidas">
+                </div>
+                <h3>Adidas</h3>
+                <p>Yeezy, Superstar, Gazelle и другие</p>
+                <a href="order.html" class="btn btn-small">Заказать</a>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1600185369205-cfbdb36358e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="New Balance">
+                </div>
+                <h3>New Balance</h3>
+                <p>550, 990, 2002R и другие модели</p>
+                <a href="order.html" class="btn btn-small">Заказать</a>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Designer">
+                </div>
+                <h3>Дизайнерские</h3>
+                <p>Balenciaga, Dior, Louis Vuitton и др.</p>
+                <a href="order.html" class="btn btn-small">Заказать</a>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Почему выбирают нас</h2>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="feature-title">Гарантия подлинности</h3>
+                <p class="feature-text">Каждая пара проходит тщательную проверку нашими экспертами</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-truck-fast"></i>
+                </div>
+                <h3 class="feature-title">Быстрая доставка</h3>
+                <p class="feature-text">От 7 дней с полным трекингом посылки</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-percent"></i>
+                </div>
+                <h3 class="feature-title">Лучшие цены</h3>
+                <p class="feature-text">Прямые поставки без наценок перекупщиков</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3 class="feature-title">Поддержка 24/7</h3>
+                <p class="feature-text">Поможем на всех этапах заказа</p>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h2>Готовы сделать заказ?</h2>
+            <p>Оставьте заявку и мы поможем вам найти нужную модель</p>
+            <a href="order.html" class="btn">Начать заказ</a>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>SWAP SHOES</h3>
+                <p>Заказ кроссовок с китайских маркетплейсов с проверкой и доставкой.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Площадки</h3>
+                <ul>
+                    <li><a href="order.html">Poizon (得物)</a></li>
+                    <li><a href="order.html">Goofish (闲鱼)</a></li>
+                    <li><a href="order.html">Weidian (微店)</a></li>
+                    <li><a href="order.html">Другие площадки</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Информация</h3>
+                <ul>
+                    <li><a href="how-to.html">Как заказать</a></li>
+                    <li><a href="delivery.html">Доставка и оплата</a></li>
+                    <li><a href="delivery.html">Тарифы</a></li>
+                    <li><a href="about.html">О компании</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Контакты</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> order@swapshoes.ru</li>
+                    <li><i class="fas fa-phone"></i> +7 (999) 123-45-67</li>
+                    <li><i class="fas fa-clock"></i> Пн-Пт: 9:00-18:00</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 SWAP SHOES. Все права защищены.</p>
+        </div>
     </footer>
 
     <script src="js/script.js"></script>
