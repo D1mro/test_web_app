@@ -8,3 +8,9 @@
       "express": "^4.18.2"
     }
   }
+{
+  "scripts": {
+    "start": "node server.js",
+    "bot": "node bot/bot.js"
+  }
+}
