@@ -1,7 +1,11 @@
 const express = require('express');
 const { Telegraf } = require('telegraf');
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
+// Укажите токен бота вручную
+const BOT_TOKEN = '7980015624:AAEdP30COOVbhlgP_hcX6mnoUfPUSErNTjg'; // Замените на ваш токен
+const WEBAPP_URL = 'https://your-webapp-url.com'; // Замените на ваш URL веб-приложения
+
+const bot = new Telegraf(BOT_TOKEN);
 const app = express();
 
 // Установка вебхука
@@ -13,7 +17,7 @@ bot.command('start', (ctx) => {
     reply_markup: {
       inline_keyboard: [[{
         text: 'Open WebApp',
-        web_app: { url: process.env.WEBAPP_URL }
+        web_app: { url: WEBAPP_URL }
       }]]
     }
   });
