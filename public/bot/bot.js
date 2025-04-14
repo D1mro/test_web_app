@@ -1,17 +1,22 @@
+const express = require('express');
 const { Telegraf } = require('telegraf');
-const bot = new Telegraf(process.env.BOT_TOKEN);
 
+const bot = new Telegraf(process.env.BOT_TOKEN);
+const app = express();
+
+// Обработчик команды
 bot.command('start', (ctx) => {
-  ctx.reply('Добро пожаловать!', {
+  ctx.reply('Welcome!', {
     reply_markup: {
-      inline_keyboard: [
-        [{
-          text: 'Открыть WebApp',
-          web_app: { url: 'https://test-web-app-tawny.vercel.app' }
-        }]
-      ]
+      inline_keyboard: [[{
+        text: 'Open WebApp',
+        web_app: { url: process.env.WEBAPP_URL }
+      }]]
     }
   });
 });
 
-bot.launch();
+// Вебхук для Telegram
+app.use(bot.webhookCallback('/webhook'));
+
+module.exports = app; // Критично для Vercel!
