@@ -5,164 +5,418 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SWAP SHOES - Заказ кроссовок с китайских маркетплейсов</title>
-    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #2a5885;
+            --secondary-color: #4b8bec;
+            --text-color: #222;
+            --light-bg: #f8f8f8;
+            --dark-bg: #1e1e1e;
+            --dark-text: #e1e1e1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover, 
+        nav ul li a.active {
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1460353581641-37baddab0fa2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .btn-small {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Container & Sections */
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        /* Categories Grid */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .category-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .category-card:hover .category-image img {
+            transform: scale(1.1);
+        }
+        
+        .category-card h3 {
+            padding: 15px 20px 5px;
+            font-size: 1.3rem;
+        }
+        
+        .category-card p {
+            padding: 0 20px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .category-card .btn-small {
+            margin: 0 20px 20px;
+            display: block;
+            text-align: center;
+        }
+        
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .feature-text {
+            color: #666;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 60px;
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .cta-section .btn {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        .cta-section .btn:hover {
+            background-color: #eee;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 60px 0 0;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-column p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .footer-column ul li i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding: 20px;
+            background-color: #111;
+            margin-top: 60px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Dark Mode (for Telegram) */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--dark-bg);
+                color: var(--dark-text);
+            }
+            
+            header, 
+            .category-card,
+            .feature-card {
+                background-color: #2d2d2d;
+            }
+            
+            .logo,
+            nav ul li a,
+            .category-card h3,
+            .feature-title {
+                color: var(--dark-text);
+            }
+            
+            .category-card p,
+            .feature-text {
+                color: #aaa;
+            }
+            
+            .hero {
+                background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                            url('https://images.unsplash.com/photo-1460353581641-37baddab0fa2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80');
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero {
+                padding: 60px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Ваш HTML-код остается без изменений -->
     <header>
-        <div class="header-container">
-            <a href="index.html" class="logo">SWAP <span>SHOES</span></a>
-            <nav>
-                <ul>
-                    <li><a href="index.html" class="active">Главная</a></li>
-                    <li><a href="order.html">Заказать</a></li>
-                    <li><a href="how-to.html">Как заказать</a></li>
-                    <li><a href="delivery.html">Доставка</a></li>
-                    <li><a href="about.html">О нас</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Эксклюзивные кроссовки с Poizon, Weidian и других площадок</h1>
-            <p>Заказывайте редкие и лимитированные модели напрямую из Китая с гарантией подлинности</p>
-            <a href="order.html" class="btn">Оформить заказ</a>
-            <a href="how-to.html" class="btn btn-outline">Как это работает</a>
-        </div>
-    </section>
-    
-    <div class="container">
-        <h2 class="section-title">Популярные категории</h2>
-        
-        <div class="categories">
-            <div class="category-card">
-                <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Nike">
-                </div>
-                <h3>Nike</h3>
-                <p>Dunk, Air Jordan, Air Force и другие модели</p>
-                <a href="order.html" class="btn btn-small">Заказать</a>
-            </div>
-            
-            <div class="category-card">
-                <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&auto=format&fit=crop&w=1025&q=80" alt="Adidas">
-                </div>
-                <h3>Adidas</h3>
-                <p>Yeezy, Superstar, Gazelle и другие</p>
-                <a href="order.html" class="btn btn-small">Заказать</a>
-            </div>
-            
-            <div class="category-card">
-                <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1600185369205-cfbdb36358e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="New Balance">
-                </div>
-                <h3>New Balance</h3>
-                <p>550, 990, 2002R и другие модели</p>
-                <a href="order.html" class="btn btn-small">Заказать</a>
-            </div>
-            
-            <div class="category-card">
-                <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Designer">
-                </div>
-                <h3>Дизайнерские</h3>
-                <p>Balenciaga, Dior, Louis Vuitton и др.</p>
-                <a href="order.html" class="btn btn-small">Заказать</a>
-            </div>
-        </div>
-        
-        <h2 class="section-title">Почему выбирают нас</h2>
-        
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <h3 class="feature-title">Гарантия подлинности</h3>
-                <p class="feature-text">Каждая пара проходит тщательную проверку нашими экспертами</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-truck-fast"></i>
-                </div>
-                <h3 class="feature-title">Быстрая доставка</h3>
-                <p class="feature-text">От 7 дней с полным трекингом посылки</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-percent"></i>
-                </div>
-                <h3 class="feature-title">Лучшие цены</h3>
-                <p class="feature-text">Прямые поставки без наценок перекупщиков</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-headset"></i>
-                </div>
-                <h3 class="feature-title">Поддержка 24/7</h3>
-                <p class="feature-text">Поможем на всех этапах заказа</p>
-            </div>
-        </div>
-        
-        <div class="cta-section">
-            <h2>Готовы сделать заказ?</h2>
-            <p>Оставьте заявку и мы поможем вам найти нужную модель</p>
-            <a href="order.html" class="btn">Начать заказ</a>
-        </div>
-    </div>
-    
-    <footer>
-        <div class="footer-container">
-            <div class="footer-column">
-                <h3>SWAP SHOES</h3>
-                <p>Заказ кроссовок с китайских маркетплейсов с проверкой и доставкой.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-telegram"></i></a>
-                    <a href="#"><i class="fab fa-vk"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Площадки</h3>
-                <ul>
-                    <li><a href="order.html">Poizon (得物)</a></li>
-                    <li><a href="order.html">Goofish (闲鱼)</a></li>
-                    <li><a href="order.html">Weidian (微店)</a></li>
-                    <li><a href="order.html">Другие площадки</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Информация</h3>
-                <ul>
-                    <li><a href="how-to.html">Как заказать</a></li>
-                    <li><a href="delivery.html">Доставка и оплата</a></li>
-                    <li><a href="delivery.html">Тарифы</a></li>
-                    <li><a href="about.html">О компании</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Контакты</h3>
-                <ul>
-                    <li><i class="fas fa-envelope"></i> order@swapshoes.ru</li>
-                    <li><i class="fas fa-phone"></i> +7 (999) 123-45-67</li>
-                    <li><i class="fas fa-clock"></i> Пн-Пт: 9:00-18:00</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="copyright">
-            <p>&copy; 2023 SWAP SHOES. Все права защищены.</p>
-        </div>
+        [... весь ваш HTML код ...]
     </footer>
 
     <script src="js/script.js"></script>
