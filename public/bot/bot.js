@@ -2,7 +2,8 @@ const { Telegraf } = require('telegraf');
 const express = require('express');
 
 const BOT_TOKEN = '7980015624:AAEdP30COOVbhlgP_hcX6mnoUfPUSErNTjg';
-const WEBAPP_URL = 'https://swap-shoes-bot.vercel.app'; // Замените на ваш реальный URL
+const WEBAPP_URL = 'https://swap-shoes-bot.vercel.app';
+const PORT = process.env.PORT || 3000;
 
 const bot = new Telegraf(BOT_TOKEN);
 const app = express();
@@ -10,18 +11,7 @@ const app = express();
 // Middleware для парсинга JSON
 app.use(express.json());
 
-// 1. Настройка вебхука (критически важно!)
-const initWebhook = async () => {
-  try {
-    const webhookUrl = `https://${process.env.VERCEL_URL}/webhook` || 'https://your-app.vercel.app/webhook';
-    await bot.telegram.setWebhook(webhookUrl);
-    console.log('Webhook установлен на:', webhookUrl);
-  } catch (e) {
-    console.error('Ошибка настройки вебхука:', e);
-  }
-};
-
-// 2. Обработчики команд
+// 1. Обработчики команд
 bot.command('start', (ctx) => {
   try {
     ctx.reply('Добро пожаловать в SWAP SHOES! 👟', {
@@ -39,31 +29,37 @@ bot.command('start', (ctx) => {
   }
 });
 
-// 3. Подключение вебхука
-app.post('/webhook', (req, res) => {
+// 2. Обработка вебхука
+app.post('/api/webhook', async (req, res) => {
   try {
-    bot.handleUpdate(req.body, res);
+    await bot.handleUpdate(req.body, res);
   } catch (e) {
     console.error('Ошибка обработки вебхука:', e);
     res.status(200).send();
   }
 });
 
-// 4. Обязательные экспорты для Vercel
-module.exports = async (req, res) => {
+// 3. Инициализация вебхука (вызывается один раз)
+const initWebhook = async () => {
   try {
-    await initWebhook();
-    return app(req, res);
+    const webhookUrl = `${WEBAPP_URL}/api/webhook`;
+    await bot.telegram.setWebhook(webhookUrl);
+    console.log('Webhook установлен на:', webhookUrl);
   } catch (e) {
-    console.error('Ошибка инициализации:', e);
-    return res.status(500).send('Internal Server Error');
+    console.error('Ошибка настройки вебхука:', e);
   }
 };
 
+// 4. Для Vercel - основной обработчик
+module.exports = app;
+
 // 5. Локальный запуск (для тестов)
 if (process.env.NODE_ENV === 'development') {
-  app.listen(3000, () => {
-    console.log('Локальный сервер запущен на порту 3000');
-    bot.launch();
+  app.listen(PORT, async () => {
+    console.log(`Локальный сервер запущен на порту ${PORT}`);
+    await initWebhook();
   });
+} else {
+  // Для продакшена инициализируем вебхук при старте
+  initWebhook().catch(console.error);
 }
